@@ -225,7 +225,11 @@ def make_transform(
         h = img.shape[0]
         if width == w and height == h:
             return img
-        img = PIL.Image.fromarray(img)
+        if len(img.shape) == 2:
+            img = PIL.Image.fromarray(img, 'L').convert('RGB')
+        else:
+            img = PIL.Image.fromarray(img, 'RGB')
+
         ww = width if width is not None else w
         hh = height if height is not None else h
         img = img.resize((ww, hh), PIL.Image.LANCZOS)
