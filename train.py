@@ -159,11 +159,13 @@ def parse_comma_separated_list(s):
 @click.option('--restart_every',help='Time interval in seconds to restart code', metavar='INT', type=int, default=9999999, show_default=True)
 
 
+@click.option('--zdim',       help='z-dim', type=int, default=64)
+
 def main(**kwargs):
     # Initialize config.
     opts = dnnlib.EasyDict(kwargs) # Command line arguments.
     c = dnnlib.EasyDict() # Main config dict.
-    c.G_kwargs = dnnlib.EasyDict(class_name=None, z_dim=64, w_dim=128, mapping_kwargs=dnnlib.EasyDict())
+    c.G_kwargs = dnnlib.EasyDict(class_name=None, z_dim=opts.zdim, w_dim=128, mapping_kwargs=dnnlib.EasyDict())
     c.G_opt_kwargs = dnnlib.EasyDict(class_name='torch.optim.Adam', betas=[0,0.99], eps=1e-8)
     c.D_opt_kwargs = dnnlib.EasyDict(class_name='torch.optim.Adam', betas=[0,0.99], eps=1e-8)
     c.data_loader_kwargs = dnnlib.EasyDict(pin_memory=True, prefetch_factor=2)
@@ -207,7 +209,7 @@ def main(**kwargs):
         use_separable_discs = True
 
     elif opts.cfg in ['fastgan', 'fastgan_lite']:
-        c.G_kwargs = dnnlib.EasyDict(class_name='pg_modules.networks_fastgan.Generator', cond=opts.cond, synthesis_kwargs=dnnlib.EasyDict())
+        c.G_kwargs = dnnlib.EasyDict(class_name='pg_modules.networks_fastgan.Generator', cond=opts.cond, synthesis_kwargs=dnnlib.EasyDict(), z_dim=opts.zdim)
         c.G_kwargs.synthesis_kwargs.lite = (opts.cfg == 'fastgan_lite')
         c.G_opt_kwargs.lr = c.D_opt_kwargs.lr = 0.0002
         use_separable_discs = False
