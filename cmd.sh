@@ -19,4 +19,8 @@
 # CUDA_VISIBLE_DEVICES=0,1 python train.py --outdir=./training-runs/celeba32 --cfg=stylegan2 --data=./data/celeba32_prep --gpus=2 --batch=64 --mirror=1 --snap=50 --batch-gpu=32 --kimg=5000 --zdim 16
 
 # SVHN
-CUDA_VISIBLE_DEVICES=2,3 python train.py --outdir=./training-runs/svhn_test_nohflip --cfg=stylegan2 --data=./data/svhn_test_prep --gpus=2 --batch=64 --mirror=0 --snap=50 --batch-gpu=32 --kimg=5000 --zdim 16
+# CUDA_VISIBLE_DEVICES=2,3 python train.py --outdir=./training-runs/svhn_test_nohflip --cfg=stylegan2 --data=./data/svhn_test_prep --gpus=2 --batch=64 --mirror=0 --snap=50 --batch-gpu=32 --kimg=5000 --zdim 16
+
+
+# EuroSAT
+python train.py --outdir=./training-runs/eurosat --cfg=stylegan2 --data=./data/eurosat_prep --gpus=4 --batch=64 --mirror=1 --snap=50 --batch-gpu=16 --kimg=5000 --zdim 16
