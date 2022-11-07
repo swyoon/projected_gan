@@ -12,4 +12,11 @@
 
 
 ### Flowers without insects
-python train.py --outdir=./training-runs/flowers-wo-insects --cfg=stylegan2 --data=./data/flowers_wo_insects_test_prep --gpus=4 --batch=64 --mirror=1 --snap=50 --batch-gpu=16 --kimg=5000 --zdim 16
+# python train.py --outdir=./training-runs/flowers-wo-insects --cfg=stylegan2 --data=./data/flowers_wo_insects_test_prep --gpus=4 --batch=64 --mirror=1 --snap=50 --batch-gpu=16 --kimg=5000 --zdim 16
+
+
+# CelebA 32
+# CUDA_VISIBLE_DEVICES=0,1 python train.py --outdir=./training-runs/celeba32 --cfg=stylegan2 --data=./data/celeba32_prep --gpus=2 --batch=64 --mirror=1 --snap=50 --batch-gpu=32 --kimg=5000 --zdim 16
+
+# SVHN
+CUDA_VISIBLE_DEVICES=2,3 python train.py --outdir=./training-runs/svhn_test --cfg=stylegan2 --data=./data/svhn_test_prep --gpus=2 --batch=64 --mirror=1 --snap=50 --batch-gpu=32 --kimg=5000 --zdim 16
